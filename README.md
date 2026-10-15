@@ -88,7 +88,4 @@ The 11 unit tests run offline without network access or API keys, using syntheti
 
 Static assets in `dist/` are automatically validated and deployed to GitHub Pages via GitHub Actions upon pushes to `main` or `master` (see `.github/workflows/pages.yml`). The workflow executes the test suite and verifies schema integrity before deploying.
 
-## Documentation
 
-- [`PRODUCTION_PLAN.md`](PRODUCTION_PLAN.md) — Production architecture, infrastructure choices, database schema, backup strategy, and cost analysis for scaling to 200 daily records.
-- [`SUBMISSION.md`](SUBMISSION.md) — Submission checklist, AI disclosure, and timeline notes.
