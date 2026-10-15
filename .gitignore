@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+tmp/
+*.zip
+.venv/
+.DS_Store
+.openai/.local/
+

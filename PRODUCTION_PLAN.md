@@ -1,0 +1,11 @@
+# Production plan — draft to adapt in your own words
+
+I would start with a $12/month DigitalOcean Ubuntu Droplet (2 GiB RAM), running a small FastAPI service, PostgreSQL, and the Python scraper through Docker Compose. Two hundred daily records are modest; one server keeps deployment and debugging simple. Caddy would serve the frontend and proxy the API. I would register a domain, point its DNS A record at the Droplet, and let Caddy manage HTTPS certificates. Only ports 80/443 and restricted SSH would be exposed; PostgreSQL would remain private.
+
+PostgreSQL would store casinos, versioned offers, source URLs, fetch times, evidence hashes, and run status. A unique casino/source/date key would make retries idempotent. Nightly encrypted `pg_dump` backups would go to a private DigitalOcean Spaces bucket, with 30 daily copies and a monthly restore drill. Weekly server backups would supplement database backups. This initial design accepts one server as a failure point; I would move the database to a managed service when uptime requirements justify it.
+
+A systemd timer would run the scraper daily at 02:00 UTC, with a lock preventing overlap. Source-specific adapters would respect robots policies, rate-limit each domain, and stop on access blocks. I would retry transient failures with bounded backoff, cache unchanged terms, validate LLM output against evidence, and flag ambiguous or large changes for review. Publishing would be atomic; failed records would retain their last successful value with a visible freshness timestamp.
+
+Structured logs and a run-status record would track successes, failures, duration, and API usage. A Healthchecks heartbeat would alert by email when the daily run is missed, late, or failed; freshness monitoring would catch partial failures. I would budget roughly $25–35/month: $12 compute, $2.40 weekly server backups, $5 object storage, about $1–2 for the domain, and a $5–10 LLM allowance. The LLM figure is a budget assumption to measure against real token usage, not a guaranteed quote; taxes and overages are extra.
+
+Pricing checked 15 October 2026: [DigitalOcean Droplets and backups](https://www.digitalocean.com/pricing/droplets), [Spaces](https://docs.digitalocean.com/products/spaces/details/pricing/). Domain and LLM costs are estimates.

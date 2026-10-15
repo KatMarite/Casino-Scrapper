@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A sourced snapshot of three casino welcome offers, extracted and validated by a small Python scraper.">
+  <title>Casino Bonus Snapshot</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="masthead"><a class="brand" href="./"><span class="brand-mark" aria-hidden="true">B</span> BONUS SNAPSHOT</a><span class="project-tag">SCREENING PROJECT / 01</span></header>
+    <section class="intro" aria-labelledby="title">
+      <p class="eyebrow"><span class="dot" aria-hidden="true"></span> ONE SOURCE. THREE OFFERS.</p>
+      <h1 id="title">The bonus.<br><span>The terms behind it.</span></h1>
+      <p class="description">A small, traceable snapshot of casino welcome offers. Each value is extracted from a public comparison page, structured with an LLM, and checked against the source.</p>
+    </section>
+    <section class="data-section" aria-labelledby="offers-heading">
+      <div class="section-heading"><div><p class="eyebrow">THE DATA</p><h2 id="offers-heading">Welcome offers</h2></div><a class="download" href="bonuses.json" download>Download JSON <span aria-hidden="true">↗</span></a></div>
+      <p id="status" role="status" aria-live="polite">Loading the latest saved snapshot…</p>
+      <div id="table-container" hidden>
+        <table>
+          <caption class="sr-only">Three casino welcome bonuses and their terms, from BonusReviewers</caption>
+          <thead><tr><th scope="col">Casino</th><th scope="col">Welcome bonus</th><th scope="col">Wagering</th><th scope="col">Min. deposit</th><th scope="col">Source</th></tr></thead>
+          <tbody id="offers"></tbody>
+        </table>
+      </div>
+      <div class="source-note"><span class="note-label">READING THIS SNAPSHOT</span><p>FS means free spins. Multi-deposit offers retain their original qualifiers. Currency symbols are reproduced as published; “$” does not identify a specific dollar currency. Wagering figures are the source’s stated multipliers, whose basis may vary by offer.</p></div>
+    </section>
+    <section class="method" aria-label="How this works"><div><span class="step">01 / FETCH</span><p>A public page, with robots.txt checked first.</p></div><div><span class="step">02 / EXTRACT</span><p>Bonus text converted to structured fields by an LLM.</p></div><div><span class="step">03 / VERIFY</span><p>Source-matched values saved as the JSON behind this table.</p></div></section>
+    <footer><p>A technical demonstration, not a casino recommendation.<br>Offers can change. Refer to the linked source and operator terms.</p><span>PYTHON + JSON + HTML</span></footer>
+  </main>
+</body>
+</html>

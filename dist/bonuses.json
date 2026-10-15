@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "fetched_at": "2026-10-15T12:47:10+00:00",
+  "source_name": "BonusReviewers",
+  "source_url": "https://www.bonusreviewers.com/casino-comparison",
+  "model": "gemini-3.6-flash",
+  "casinos": [
+    {
+      "casino": "Betandplay Casino",
+      "welcome_bonus": "Up to €4,000 across 4 deposits + FS",
+      "wagering_requirement": 40,
+      "minimum_deposit": "€20",
+      "source_url": "https://www.bonusreviewers.com/casino-comparison"
+    },
+    {
+      "casino": "Rooli Casino",
+      "welcome_bonus": "Up to $4,000 + 475 FS across 4 tiers",
+      "wagering_requirement": 35,
+      "minimum_deposit": "$30",
+      "source_url": "https://www.bonusreviewers.com/casino-comparison"
+    },
+    {
+      "casino": "Jackpoty",
+      "welcome_bonus": "100% up to €500 + 100 FS (1st tier)",
+      "wagering_requirement": 40,
+      "minimum_deposit": "€20",
+      "source_url": "https://www.bonusreviewers.com/casino-comparison"
+    }
+  ]
+}

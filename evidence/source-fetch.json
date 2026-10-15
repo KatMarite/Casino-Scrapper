@@ -1,0 +1,30 @@
+{
+  "fetched_at": "2026-10-15T12:47:38+00:00",
+  "source_url": "https://www.bonusreviewers.com/casino-comparison",
+  "http_status": 200,
+  "html_sha256": "05651367a95b3463b6277094cfd19ac7630c65e1a375faa8b01e59d4ff6ef5c8",
+  "robots_url": "https://www.bonusreviewers.com/robots.txt",
+  "robots_text": "# As a condition of accessing this website, you agree to abide by the following\n# content signals:\n\n# (a)  If a content-signal = yes, you may collect content for the corresponding\n#      use.\n# (b)  If a content-signal = no, you may not collect content for the\n#      corresponding use.\n# (c)  If the website operator does not include a content signal for a\n#      corresponding use, the website operator neither grants nor restricts\n#      permission via content signal with respect to the corresponding use.\n\n# The content signals and their meanings are:\n\n# search:   building a search index and providing search results (e.g., returning\n#           hyperlinks and short excerpts from your website's contents). Search does not\n#           include providing AI-generated search summaries.\n# ai-input: inputting content into one or more AI models (e.g., retrieval\n#           augmented generation, grounding, or other real-time taking of content for\n#           generative AI search answers).\n# ai-train: training or fine-tuning AI models.\n\n# ANY RESTRICTIONS EXPRESSED VIA CONTENT SIGNALS ARE EXPRESS RESERVATIONS OF\n# RIGHTS UNDER ARTICLE 4 OF THE EUROPEAN UNION DIRECTIVE 2019/790 ON COPYRIGHT\n# AND RELATED RIGHTS IN THE DIGITAL SINGLE MARKET.\n",
+  "user_agent": "CasinoBonusScreening/1.0",
+  "crawl_delay_seconds": 2.0,
+  "selected_terms": [
+    {
+      "casino": "Betandplay Casino",
+      "bonus_text": "Up to €4,000 across 4 deposits + FS",
+      "wagering_text": "40x",
+      "deposit_text": "€20"
+    },
+    {
+      "casino": "Rooli Casino",
+      "bonus_text": "Up to $4,000 + 475 FS across 4 tiers",
+      "wagering_text": "35x",
+      "deposit_text": "$30"
+    },
+    {
+      "casino": "Jackpoty",
+      "bonus_text": "100% up to €500 + 100 FS (1st tier)",
+      "wagering_text": "40x",
+      "deposit_text": "€20"
+    }
+  ]
+}
