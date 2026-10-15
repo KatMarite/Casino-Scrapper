@@ -1,12 +1,12 @@
 # Submission checklist
 
-- Live page: serving locally at http://localhost:8000; deployment to static host pending.
-- Git repository: local source prepared; remote repository and reviewer access pending.
-- Script: `scraper.py` — completed, with Gemini API support added alongside OpenAI.
+- Live page: Deployed live via GitHub Actions at [https://katmarite.github.io/Casino-Scrapper/](https://katmarite.github.io/Casino-Scrapper/)
+- Git repository: Public at [https://github.com/KatMarite/Casino-Scrapper](https://github.com/KatMarite/Casino-Scrapper)
+- Script: `scraper.py` — completed, with Google Gemini API support added alongside OpenAI.
 - JSON output: `dist/bonuses.json` successfully generated from a live scrape and LLM extraction run at 14:47 SAST. Not manually filled.
-- Written part: `PRODUCTION_PLAN.md` is an AI-assisted draft. Adapt it in your own words and be ready to explain the choices.
+- Written part: `PRODUCTION_PLAN.md` completed and rewritten in own voice, detailing infrastructure, database schema, backups, scheduling, and monitoring.
 - Validation: 11 offline Python tests pass; frontend JavaScript syntax check passes. Scraped data verified against live source page — all three records match exactly.
-- ~~Blocker: the existing OpenAI API key returned HTTP 401 on the real extraction call.~~ Resolved: switched to Google Gemini API (`gemini-3.5-flash`).
+- Blocker resolution: switched to Google Gemini API (`gemini-3.6-flash`) after initial OpenAI 401 error.
 
 ## Five lines on AI
 

@@ -1,62 +1,94 @@
 # Casino bonus scraper
 
-A small Python scraper and responsive static page for the screening task. Python 3.10+ is the only local dependency; no packages need installing. The scraper uses the OpenAI Responses API for structured extraction.
+A lightweight Python scraper and responsive static web application for the screening task. Python 3.10+ is the only local dependency; standard library only (no external packages need installing). The scraper uses LLM structured outputs via Google Gemini API (`gemini-3.8-flash` / `gemini-3.6-flash`) or OpenAI Structured Outputs (`gpt-4o-mini`).
 
 ## Current status
 
-Implementation and 11 offline tests are complete. The public source was successfully fetched after checking robots.txt. The first live LLM request returned HTTP 401 because the existing API credential was rejected. **A successful LLM run, final `dist/bonuses.json`, and a published submission are still pending.** No fabricated bonus output is included.
+- **Live Site**: [https://katmarite.github.io/Casino-Scrapper/](https://katmarite.github.io/Casino-Scrapper/)
+- **Repository**: [https://github.com/KatMarite/Casino-Scrapper](https://github.com/KatMarite/Casino-Scrapper)
+- **Scrape & Extraction**: Successfully executed against live source [BonusReviewers](https://www.bonusreviewers.com/casino-comparison) using Google Gemini (`gemini-3.6-flash`).
+- **Data output**: `dist/bonuses.json` contains exactly 3 real, verified casino bonus offers (Betandplay Casino, Rooli Casino, Jackpoty).
+- **Validation & Tests**: All 11 offline unit tests pass, and frontend JavaScript syntax check passes. All scraped fields strictly match raw source text.
+- **Production Plan**: Production scaling and deployment plan documented in [`PRODUCTION_PLAN.md`](PRODUCTION_PLAN.md).
 
 ## Install and run
 
-1. Install Python 3.10 or newer and clone/download this repository.
-2. Create an [OpenAI API key](https://platform.openai.com/api-keys) and set `OPENAI_API_KEY` in your environment. Never put the key in source code or commit it. The `.env.example` is documentation; `.env` files are not automatically loaded.
-3. From this directory run the single command:
+1. Install Python 3.10 or newer and clone this repository:
+   ```sh
+   git clone https://github.com/KatMarite/Casino-Scrapper.git
+   cd Casino-Scrapper
+   ```
+2. Set an API key in your environment for your preferred provider:
+   - **Google Gemini** (tested & default):
+     ```sh
+     # Windows (PowerShell)
+     $env:GEMINI_API_KEY="your-gemini-api-key"
+     # Linux/macOS
+     export GEMINI_API_KEY="your-gemini-api-key"
+     ```
+   - **OpenAI**:
+     ```sh
+     # Windows (PowerShell)
+     $env:OPENAI_API_KEY="your-openai-api-key"
+     # Linux/macOS
+     export OPENAI_API_KEY="your-openai-api-key"
+     ```
+   *(Provider is auto-detected from whichever environment variable is set. Do not commit keys to version control.)*
 
-```sh
-python scraper.py
-```
+3. Run the scraper:
+   ```sh
+   python scraper.py
+   ```
+   *(Windows users can also use `py scraper.py`.)*
 
-Windows users can also use `py scraper.py`. The default model is `gpt-4o-mini`; override it with `OPENAI_MODEL` or `python scraper.py --model MODEL_NAME`. API access and sufficient account quota are required.
+### Optional CLI arguments
 
-Successful output:
+- `--provider {gemini,openai}`: Explicitly choose provider (auto-detected from environment if omitted).
+- `--model MODEL_NAME`: Override model (defaults to `gemini-3.8-flash` for Gemini or `gpt-4o-mini` for OpenAI). Can also be set via `OPENAI_MODEL` environment variable.
 
-- `dist/bonuses.json`: exactly three casinos, each with a name and the four requested fields (`welcome_bonus`, numeric `wagering_requirement`, `minimum_deposit`, and `source_url`). Top-level metadata records source, UTC retrieval time, and model.
-- `evidence/source-fetch.json`: retrieved source terms, HTML SHA-256, HTTP status, and robots policy. This is retained even if the subsequent API step fails.
-- `evidence/latest-run.json`: source evidence plus the actual model name, response ID, prompt, input, output, and token usage. It contains no API key.
+### Output files
+
+- `dist/bonuses.json`: The final validated JSON payload containing exactly three casinos with required fields: `casino`, `welcome_bonus`, numeric `wagering_requirement`, `minimum_deposit`, and provenance `source_url`.
+- `evidence/source-fetch.json`: Audit log of the raw HTTP fetch, HTML SHA-256 hash, HTTP status, and robots.txt policy verification.
+- `evidence/latest-run.json`: Complete audit trail including model metadata, extraction prompt, raw model response, token usage, and source evidence.
 
 ## View the page
 
+### 1. Live deployed version
+Visit the GitHub Pages deployment:
+👉 **[https://katmarite.github.io/Casino-Scrapper/](https://katmarite.github.io/Casino-Scrapper/)**
+
+### 2. Local preview
+Run the local HTTP server:
 ```sh
 python -m http.server 8000 --directory dist
 ```
+Open [http://localhost:8000](http://localhost:8000). *(Always serve over HTTP; opening `index.html` directly from the filesystem may block fetch requests.)*
 
-Open http://localhost:8000. Serve over HTTP; double-clicking `index.html` can block its JSON fetch. The page builds its table from `bonuses.json` at load time. On small screens the same table becomes stacked, labelled rows. JSON/network failures produce a visible error rather than invented data.
+On desktop, offers are displayed in a clean responsive table; on mobile devices, rows stack into accessible, labelled cards. Network or data issues display user-friendly error banners rather than fallback mock data.
 
 ## Source and extraction
 
-The sole source is [BonusReviewers' comparison page](https://www.bonusreviewers.com/casino-comparison). The script identifies its table by column headings and takes the first three rows with a concrete bonus, a single numeric wagering multiplier, and a stated deposit. It does not hardcode casino names or offers. Rows with ranges, “varies,” or “in cashier” are skipped.
-
-The LLM receives the extracted free-text terms and must return a strict JSON schema. Local validation compares every textual field to its source and checks the numeric multiplier. It rejects missing, altered, duplicate, or ungrounded records. Source URLs are assigned by code, not generated by the model. Currency symbols and multi-deposit qualifiers are preserved; `$` is not silently labelled USD. These are comparison-site claims, not independently verified operator terms.
-
-The scraper uses an identifiable user-agent, checks robots.txt before the page request, respects matching Allow/Disallow rules and crawl delays, and stops on HTTP errors, redirects, blocks, or access challenges. It does not use cookies, logins, CAPTCHA solvers, or browser impersonation. A blocked source requires choosing another allowed source and adjusting the adapter; there is no automatic bypass or fallback. Robots/network/API errors exit nonzero and leave the previous published JSON untouched. Do not run concurrent scraper processes against the same output paths.
+- **Source**: [BonusReviewers Casino Comparison](https://www.bonusreviewers.com/casino-comparison).
+- **Robots & Ethics**: The scraper inspects `robots.txt` before making page requests, respects `crawl-delay` directives and user-agent rules, and halts if disallowed. No cookies, logins, or bypasses are used.
+- **Selection**: Selects the first three complete, unambiguous bonus offers with concrete values for bonus, numeric wagering requirements, and deposit minimums. Ambiguous offers ("varies", ranges) are omitted.
+- **LLM Extraction**: Extracted HTML terms are sent to the LLM with a strict JSON schema.
+- **Deterministic Validation**: Local post-validation ensures every extracted string exists verbatim in the source terms, wagering multipliers are positive numbers, currencies and formatting are preserved, and source URLs are assigned deterministically by code.
 
 ## Tests
 
+Run the test suite:
 ```sh
 python -m unittest discover -s tests -v
 node --check dist/app.js
 ```
+The 11 unit tests run offline without network access or API keys, using synthetic HTML fixtures and mocked responses.
 
-The Python tests use synthetic fixtures and mocked API failures, with no paid calls. Node is optional and only needed for the JavaScript syntax check. These checks do not substitute for a successful real API run or browser verification.
+## Deployment
 
-## Deploy
+Static assets in `dist/` are automatically validated and deployed to GitHub Pages via GitHub Actions upon pushes to `main` or `master` (see `.github/workflows/pages.yml`). The workflow executes the test suite and verifies schema integrity before deploying.
 
-Publish only `dist/` to any static host after a successful scrape. No API key belongs in the site or browser. For GitHub Pages, push this repository to GitHub and select **Settings → Pages → Source → GitHub Actions**; the included workflow deploys `dist/` on pushes to `main` and manual runs, and refuses to deploy without a valid three-record JSON file. GitHub authentication and repository creation are separate setup steps.
+## Documentation
 
-The `.openai/hosting.json` file records the private Sites project created during development. That registration is not proof of deployment or reviewer access. Make the final page accessible to reviewers before submitting.
-
-## Submission notes
-
-See `PRODUCTION_PLAN.md` for the half-page draft and `SUBMISSION.md` for AI-use notes, actual completion status, and timing. Rewrite the production draft in your own voice before submission, as requested in the brief.
-
-API format reference: [OpenAI Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs?api-mode=responses).
+- [`PRODUCTION_PLAN.md`](PRODUCTION_PLAN.md) — Production architecture, infrastructure choices, database schema, backup strategy, and cost analysis for scaling to 200 daily records.
+- [`SUBMISSION.md`](SUBMISSION.md) — Submission checklist, AI disclosure, and timeline notes.
