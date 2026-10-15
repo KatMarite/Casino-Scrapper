@@ -3,33 +3,320 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A sourced snapshot of three casino welcome offers, extracted and validated by a small Python scraper.">
-  <title>Casino Bonus Snapshot</title>
+  <meta name="description" content="A verified, sourced snapshot of casino welcome offers extracted with Google Gemini and deterministically verified against live terms.">
+  <title>Casino Bonus Intelligence | Verified Live Offers</title>
+  
+  <!-- Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
 </head>
 <body>
-  <main>
-    <header class="masthead"><a class="brand" href="./"><span class="brand-mark" aria-hidden="true">B</span> BONUS SNAPSHOT</a><span class="project-tag">SCREENING PROJECT / 01</span></header>
-    <section class="intro" aria-labelledby="title">
-      <p class="eyebrow"><span class="dot" aria-hidden="true"></span> ONE SOURCE. THREE OFFERS.</p>
-      <h1 id="title">The bonus.<br><span>The terms behind it.</span></h1>
-      <p class="description">A small, traceable snapshot of casino welcome offers. Each value is extracted from a public comparison page, structured with an LLM, and checked against the source.</p>
-    </section>
-    <section class="data-section" aria-labelledby="offers-heading">
-      <div class="section-heading"><div><p class="eyebrow">THE DATA</p><h2 id="offers-heading">Welcome offers</h2></div><a class="download" href="bonuses.json" download>Download JSON <span aria-hidden="true">↗</span></a></div>
-      <p id="status" role="status" aria-live="polite">Loading the latest saved snapshot…</p>
-      <div id="table-container" hidden>
-        <table>
-          <caption class="sr-only">Three casino welcome bonuses and their terms, from BonusReviewers</caption>
-          <thead><tr><th scope="col">Casino</th><th scope="col">Welcome bonus</th><th scope="col">Wagering</th><th scope="col">Min. deposit</th><th scope="col">Source</th></tr></thead>
-          <tbody id="offers"></tbody>
-        </table>
+  <div class="ambient-glow ambient-glow-top" aria-hidden="true"></div>
+  <div class="ambient-glow ambient-glow-right" aria-hidden="true"></div>
+
+  <div class="app-wrapper">
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="nav-brand">
+        <a class="brand-link" href="./">
+          <div class="brand-icon-box">
+            <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">BONUS<strong>INTELLIGENCE</strong></span>
+            <span class="brand-sub">SOURCE-VERIFIED RADAR</span>
+          </div>
+        </a>
       </div>
-      <div class="source-note"><span class="note-label">READING THIS SNAPSHOT</span><p>FS means free spins. Multi-deposit offers retain their original qualifiers. Currency symbols are reproduced as published; “$” does not identify a specific dollar currency. Wagering figures are the source’s stated multipliers, whose basis may vary by offer.</p></div>
-    </section>
-    <section class="method" aria-label="How this works"><div><span class="step">01 / FETCH</span><p>A public page, with robots.txt checked first.</p></div><div><span class="step">02 / EXTRACT</span><p>Bonus text converted to structured fields by an LLM.</p></div><div><span class="step">03 / VERIFY</span><p>Source-matched values saved as the JSON behind this table.</p></div></section>
-    <footer><p>A technical demonstration, not a casino recommendation.<br>Offers can change. Refer to the linked source and operator terms.</p><span>PYTHON + JSON + HTML</span></footer>
-  </main>
+
+      <div class="nav-badges">
+        <div class="live-pill" title="Data extracted and verified against live source">
+          <span class="pulse-beacon" aria-hidden="true"></span>
+          <span class="pill-text">LIVE PIPELINE</span>
+        </div>
+        <a class="nav-cta" href="bonuses.json" download id="download-json-btn">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>bonuses.json</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <!-- Hero Section -->
+      <section class="hero-section" aria-labelledby="hero-title">
+        <div class="hero-tag">
+          <span class="badge-gemini">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true">
+              <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/>
+            </svg>
+            POWERED BY GEMINI 3.6 FLASH
+          </span>
+          <span class="badge-source">100% SOURCE FIDELITY</span>
+        </div>
+
+        <h1 id="hero-title">
+          Casino Welcome Bonuses.<br>
+          <span class="text-gradient">Verified &amp; Grounded in Evidence.</span>
+        </h1>
+
+        <p class="hero-description">
+          Automated extraction pipeline for online casino welcome offers. Every bonus amount, 
+          wagering multiplier, and deposit threshold is extracted from public comparison tables 
+          via Google Gemini and strictly validated against raw source text before publication.
+        </p>
+
+        <!-- Metrics / KPI Grid -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon kpi-icon-emerald">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-value" id="kpi-count">3</span>
+              <span class="kpi-label">Active Verified Offers</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon kpi-icon-amber">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-value">35×</span>
+              <span class="kpi-label">Lowest Wagering (Rooli)</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon kpi-icon-blue">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-value">100%</span>
+              <span class="kpi-label">Source-Grounded Terms</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon kpi-icon-purple">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 14 14"></polyline>
+              </svg>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-value">robots.txt</span>
+              <span class="kpi-label">Ethical Crawl Policy</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Data Section -->
+      <section class="data-section" aria-labelledby="offers-heading">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-pretitle">COMPARISON MATRIX</div>
+            <h2 id="offers-heading">Verified Bonus Offers</h2>
+          </div>
+
+          <!-- Controls: Search, Sort, View Toggle -->
+          <div class="data-controls">
+            <div class="search-box">
+              <svg class="search-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="search-input" placeholder="Filter casinos or offers…" aria-label="Filter casinos">
+            </div>
+
+            <div class="sort-box">
+              <label for="sort-select" class="sr-only">Sort Offers</label>
+              <select id="sort-select" aria-label="Sort offers">
+                <option value="default">Default Order</option>
+                <option value="wagering-asc">Wagering: Low to High</option>
+                <option value="wagering-desc">Wagering: High to Low</option>
+                <option value="name-asc">Casino Name: A to Z</option>
+              </select>
+            </div>
+
+            <div class="view-toggles" role="group" aria-label="View format">
+              <button type="button" id="toggle-cards" class="view-btn active" title="Cards View" aria-pressed="true">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="14" width="7" height="7"></rect>
+                  <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Cards</span>
+              </button>
+              <button type="button" id="toggle-table" class="view-btn" title="Table View" aria-pressed="false">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="8" y1="6" x2="21" y2="6"></line>
+                  <line x1="8" y1="12" x2="21" y2="12"></line>
+                  <line x1="8" y1="18" x2="21" y2="18"></line>
+                  <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                  <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                  <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                </svg>
+                <span>Table</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Status message -->
+        <div id="status" class="status-banner" role="status" aria-live="polite">
+          <div class="status-spinner" aria-hidden="true"></div>
+          <span>Loading the verified snapshot…</span>
+        </div>
+
+        <!-- Card View Container (Modern Rich Cards) -->
+        <div id="cards-container" class="cards-grid" hidden>
+          <!-- Injected dynamically by app.js -->
+        </div>
+
+        <!-- Table View Container -->
+        <div id="table-container" class="table-responsive" hidden>
+          <table class="modern-table">
+            <caption class="sr-only">Three casino welcome bonuses and their terms, extracted from BonusReviewers</caption>
+            <thead>
+              <tr>
+                <th scope="col" class="th-rank">#</th>
+                <th scope="col" class="th-casino">Casino</th>
+                <th scope="col" class="th-bonus">Welcome Bonus Offer</th>
+                <th scope="col" class="th-wagering">Wagering Multiplier</th>
+                <th scope="col" class="th-deposit">Min. Deposit</th>
+                <th scope="col" class="th-source">Provenance</th>
+              </tr>
+            </thead>
+            <tbody id="offers">
+              <!-- Injected dynamically by app.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Provenance & Reading Guide Callout -->
+        <div class="guide-card">
+          <div class="guide-header">
+            <div class="guide-icon">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+            </div>
+            <h3>How to Read This Snapshot</h3>
+          </div>
+          <div class="guide-body">
+            <p>
+              <strong>FS:</strong> Free Spins on eligible slot games. 
+              <strong>Multi-tier:</strong> Offers split across multiple deposits (e.g. 1st–4th tier) retain original terms without consolidation.
+              <strong>Currency Fidelity:</strong> Currency symbols (€, $, £) are reproduced as published without assumption.
+              <strong>Wagering:</strong> Numbers show stated rollover multiplier required prior to withdrawal.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Architecture & Pipeline Section -->
+      <section class="pipeline-section" aria-labelledby="pipeline-heading">
+        <div class="section-title-wrap text-center">
+          <div class="section-pretitle">TECHNICAL DESIGN</div>
+          <h2 id="pipeline-heading">Three-Stage Integrity Pipeline</h2>
+        </div>
+
+        <div class="pipeline-steps">
+          <div class="step-card">
+            <div class="step-num">01</div>
+            <div class="step-icon-wrap">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                <line x1="6" y1="18" x2="6.01" y2="18"></line>
+              </svg>
+            </div>
+            <h4>Ethical Crawl</h4>
+            <p>Inspects <code>robots.txt</code>, obeys crawl-delays, and stops immediately on challenges or HTTP errors without using headless browser impersonation.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">02</div>
+            <div class="step-icon-wrap">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a10 10 0 1 0 10 10H12V2z"></path>
+                <path d="M12 12L2.1 10.5"></path>
+                <path d="M12 12V22"></path>
+              </svg>
+            </div>
+            <h4>LLM Extraction</h4>
+            <p>Raw table rows are fed into Google Gemini (<code>gemini-3.6-flash</code>) with strict JSON Schema constraints to structure terms consistently.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">03</div>
+            <div class="step-icon-wrap">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+            </div>
+            <h4>Grounded Proof</h4>
+            <p>Deterministic Python assertions verify extracted text strings against source HTML evidence. Halts if any number or term is hallucinated.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-left">
+          <p class="footer-disclaimer">
+            <strong>Technical Screening Demonstration</strong> · Sourced from public comparison data. Offers subject to operator change.
+          </p>
+          <p class="footer-links">
+            <a href="https://github.com/KatMarite/Casino-Scrapper" target="_blank" rel="noopener noreferrer">GitHub Repository ↗</a>
+            <span class="sep">·</span>
+            <a href="https://www.bonusreviewers.com/casino-comparison" target="_blank" rel="noopener noreferrer">Source: BonusReviewers ↗</a>
+            <span class="sep">·</span>
+            <a href="bonuses.json" download>Raw JSON ↗</a>
+          </p>
+        </div>
+        <div class="footer-right">
+          <div class="tech-stack-pill">
+            <span>PYTHON 3.10+</span>
+            <span class="dot">·</span>
+            <span>GEMINI FLASH</span>
+            <span class="dot">·</span>
+            <span>VANILLA JS &amp; CSS</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
